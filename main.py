@@ -88,25 +88,6 @@ if __name__ == '__main__':
 
     for i in range(2, len(sys.argv)):
         if sys.argv[i] == '-o':
-
-        # included_file_path = os.path.join(os.path.dirname(file), included_file) # And path to it, relative to main.py
-
-        # if included_file_path in visited:
-        #     continue
-
-        # visited.append(included_file_path)
-        # included_files += [included_file_path] + get_included_files_recursive(included_file_path, visited)
-
-        
-        # if os.path.splitext(included_file)[1] in ['.h', '.hpp']: # If file is header
-        #     source_file = included_file.replace('.hpp', main_file_ext).replace('.h', main_file_ext) # Getting its source file
-        #     source_file_path = os.path.join(os.path.dirname(file), source_file) # And path to it
-            
-        #     try:
-        #         included_files += [source_file_path] + get_included_files_recursive(included_file_path, include_directories, visited)
-        #     except:
-        #         print(f'File {source_file_path} not found.')
-        #         sys.exit(1)
             if i + 1 >= len(sys.argv):
                 print('Option -o requires an argument')
                 sys.exit(1)

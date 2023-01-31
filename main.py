@@ -11,15 +11,18 @@ def build(main_file, output, include_directories, compiler_flags):
     main_file_basename, main_file_ext = os.path.splitext(main_file)
     main_file_basename = os.path.basename(main_file_basename)
 
-    files = [main_file] + get_included_files_recursive(main_file, include_directories) # Files list contains main file and all dependencies for it
-
     if not output:
         output = main_file_basename
 
-    compiler = 'gcc' if main_file_ext == '.c' else 'g++' if main_file_ext == '.cpp' else '' # What compiler should we use?
-    if not compiler:
-        raise Exception('File you\'re passed is not C or C++ source file!')
+    if main_file_ext == '.c':
+        compiler = 'gcc'
+    elif main_file_ext == '.cpp':
+        compiler = 'g++'
+    else:
+        print('File is not C or C++ source file!')
+        sys.exit(1)
 
+    files = [main_file] + get_included_files_recursive(main_file, include_directories) # Files list contains main file and all dependencies for it
     cmd = [compiler] + compiler_flags + files + ['-o', output]
     for directory in include_directories:
         cmd += ['-I', directory]
@@ -34,7 +37,8 @@ def build(main_file, output, include_directories, compiler_flags):
 
 def get_included_files_recursive(file, include_directories, visited=[]):
     included_files = []
-    with open(file, 'r') as f: lines = f.readlines()
+    with open(file, 'r') as f:
+        lines = f.readlines()
 
     for line in lines:
         match = re.search(r'^\s*#include\s+"(.+)"', line) # Search for include directive

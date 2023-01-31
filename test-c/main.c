@@ -1,4 +1,4 @@
-#include "bruh.h"
+#include "lib.h"
 
 int main()
 {

@@ -1,7 +1,7 @@
 Builder - simple python script for building C/C++ projects.
 It is parsing all "#include"'s from project files and passing them to gcc/g++.
 
-# Usage
+## Usage
 build.py main_file [options]
 
 Options:
